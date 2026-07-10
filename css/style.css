@@ -75,6 +75,9 @@ body {
 .brand-name .dim {
   color: var(--color-text-faint);
 }
+.dim {
+  color: var(--color-text-faint);
+}
 
 .site-nav {
   display: flex;
@@ -275,6 +278,23 @@ body {
   flex-wrap: wrap;
 }
 
+.agentic-line {
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-divider);
+  max-width: 60ch;
+}
+.agentic-line p {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+.agentic-label {
+  font-family: var(--font-mono);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
 /* ---------- Sections ---------- */
 .section {
   padding-block: clamp(var(--space-12), 8vw, var(--space-24));
@@ -353,6 +373,119 @@ body {
 .fact dd {
   font-size: var(--text-base);
   color: var(--color-text);
+}
+
+/* ---------- Experience timeline ---------- */
+.timeline {
+  display: grid;
+  gap: var(--space-10);
+}
+.timeline-item {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: var(--space-8);
+  padding-bottom: var(--space-10);
+  border-bottom: 1px solid var(--color-divider);
+}
+.timeline-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+@media (max-width: 720px) {
+  .timeline-item {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+}
+.timeline-dates {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+  letter-spacing: 0.02em;
+}
+.timeline-body h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 650;
+  color: var(--color-text);
+}
+.timeline-org {
+  font-size: var(--text-sm);
+  color: var(--color-primary);
+  margin-top: var(--space-1);
+  margin-bottom: var(--space-4);
+}
+.timeline-body ul {
+  display: grid;
+  gap: var(--space-2);
+}
+.timeline-body ul li {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  padding-left: var(--space-5);
+  position: relative;
+  max-width: 66ch;
+}
+.timeline-body ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-primary);
+}
+
+/* ---------- Education & certifications ---------- */
+.edu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-10);
+  margin-top: var(--space-12);
+  padding-top: var(--space-10);
+  border-top: 1px solid var(--color-divider);
+}
+@media (max-width: 720px) {
+  .edu-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+}
+.edu-block .sidebar-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  display: block;
+  margin-bottom: var(--space-4);
+}
+.edu-list {
+  display: grid;
+  gap: var(--space-3);
+  list-style: none;
+}
+.edu-list li {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  padding-left: var(--space-5);
+  position: relative;
+  max-width: 60ch;
+}
+.edu-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-text-faint);
+}
+.edu-list li strong {
+  color: var(--color-text);
+  font-weight: 600;
 }
 
 /* ---------- Skills ---------- */
