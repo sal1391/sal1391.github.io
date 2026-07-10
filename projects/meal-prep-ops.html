@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meal Prep Ops — Production Operations App | Carlos Salgado</title>
+<meta name="description" content="Case study: a production Django app that runs the day-to-day operations of a real meal-prep business — clients, meal plans, inventory, and kitchen production.">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,500&f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../index.html" class="brand" aria-label="Carlos Salgado — home">
+      <img src="../assets/mark.svg" alt="" class="brand-mark" width="34" height="34">
+      <span class="brand-name">carlos<span class="dim">.</span>salgado</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#skills">Skills</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container">
+
+    <section class="case-hero">
+      <a href="../index.html" class="back-link">Back to all projects</a>
+      <p class="case-kicker">Project 05 / Production operations software</p>
+      <h1>Meal Prep Ops</h1>
+      <p class="case-oneliner">A production Django app that runs the day-to-day operations of a real
+        meal-prep business — clients, meal plans, inventory, and kitchen production.</p>
+      <div class="case-meta-row">
+        <span class="status status-live">Live in production</span>
+        <div class="badge-row">
+          <span class="tag">Django 5.2</span>
+          <span class="tag">HTMX</span>
+          <span class="tag">Alpine.js</span>
+          <span class="tag">Tailwind</span>
+          <span class="tag">Postgres</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-body">
+      <div class="case-main">
+        <article>
+
+          <section>
+            <h2><span class="num">01</span> Problem</h2>
+            <p>A growing meal-prep business ran its client meal plans, ingredient inventory, and
+              weekly kitchen production entirely on spreadsheets. There was no single source of
+              truth across the business, and nothing mobile-friendly for kitchen staff working
+              on their feet during production days.</p>
+          </section>
+
+          <section>
+            <h2><span class="num">02</span> Solution</h2>
+            <p>A full Django application with an owner-facing client and meal-plan editor, a
+              weekly production planner that aggregates every client's individual plan into
+              raw-pound thaw tasks and packing lists, a mobile-first kitchen view — thaw sheets,
+              packing cards — installable as a PWA on staff phones, and an inventory dashboard
+              with automatic shortfall alerts.</p>
+          </section>
+
+          <section>
+            <h2><span class="num">03</span> Architecture</h2>
+            <p>A Django 5.2 app (HTMX + Alpine.js + Tailwind on the front end) backs onto
+              Postgres, is fully Dockerized, and deploys to Railway with Sentry error tracking
+              in production. The owner portal, kitchen mobile views, and inventory dashboard are
+              separate modules that share one underlying data model.</p>
+            <div class="diagram-frame">
+              <div class="diagram-scroll"><svg viewBox="0 0 880 320" role="img" aria-label="Architecture diagram: a Django 5.2 app with HTMX, Alpine, and Tailwind serves three modules — owner portal, kitchen PWA, and inventory dashboard — sharing one Postgres data model, Dockerized and deployed on Railway with Sentry monitoring.">
+                <defs>
+                  <marker id="arrow-t5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0 0L10 5L0 10z" fill="#8b93a7"/>
+                  </marker>
+                  <marker id="arrow-t5-accent" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0 0L10 5L0 10z" fill="#f5a524"/>
+                  </marker>
+                </defs>
+                <style>
+                  .node-rect{fill:#141926;stroke:#2a3244;stroke-width:1.5;}
+                  .node-label{font-family:'JetBrains Mono',monospace;font-size:12.5px;fill:#e7eaf1;}
+                  .node-sub{font-family:'JetBrains Mono',monospace;font-size:10px;fill:#8b93a7;}
+                  .edge{stroke:#8b93a7;stroke-width:1.5;fill:none;}
+                  .edge-accent{stroke:#f5a524;stroke-width:1.7;fill:none;}
+                  .group-label{font-family:'JetBrains Mono',monospace;font-size:10px;fill:#565f74;letter-spacing:0.06em;}
+                </style>
+
+                <rect x="20" y="30" width="220" height="70" rx="8" fill="#101420" stroke="#2a3244"/>
+                <text x="130" y="58" text-anchor="middle" class="node-label">Django 5.2</text>
+                <text x="130" y="76" text-anchor="middle" class="node-sub">HTMX + Alpine.js + Tailwind</text>
+
+                <path class="edge-accent" d="M240 65 H300" marker-end="none"/>
+                <path class="edge-accent" d="M130 100 V150" marker-end="url(#arrow-t5-accent)"/>
+
+                <rect x="20" y="150" width="150" height="52" rx="8" class="node-rect"/>
+                <text x="95" y="180" text-anchor="middle" class="node-sub">Owner portal</text>
+
+                <rect x="190" y="150" width="150" height="52" rx="8" class="node-rect"/>
+                <text x="265" y="180" text-anchor="middle" class="node-sub">Kitchen PWA</text>
+
+                <rect x="360" y="150" width="170" height="52" rx="8" class="node-rect"/>
+                <text x="445" y="180" text-anchor="middle" class="node-sub">Inventory dashboard</text>
+
+                <path class="edge" d="M95 202 V240 H445 V202" marker-end="none"/>
+                <path class="edge" d="M265 202 V240" marker-end="none"/>
+
+                <rect x="140" y="240" width="330" height="56" rx="8" class="node-rect"/>
+                <text x="305" y="264" text-anchor="middle" class="node-label">Postgres</text>
+                <text x="305" y="282" text-anchor="middle" class="node-sub">one shared data model</text>
+
+                <rect x="600" y="30" width="240" height="266" rx="10" fill="#101420" stroke="#2a3244"/>
+                <text x="720" y="20" text-anchor="middle" class="group-label">DEPLOYMENT</text>
+                <rect x="622" y="52" width="196" height="46" rx="6" class="node-rect"/>
+                <text x="720" y="80" text-anchor="middle" class="node-sub">Docker container</text>
+                <path class="edge" d="M720 98 V126" marker-end="url(#arrow-t5)"/>
+                <rect x="622" y="126" width="196" height="46" rx="6" class="node-rect"/>
+                <text x="720" y="154" text-anchor="middle" class="node-sub">Railway (hosting)</text>
+                <path class="edge" d="M720 172 V200" marker-end="url(#arrow-t5)"/>
+                <rect x="622" y="200" width="196" height="46" rx="6" class="node-rect"/>
+                <text x="720" y="228" text-anchor="middle" class="node-sub">Sentry (error tracking)</text>
+
+                <path class="edge-accent" d="M470 270 H600" marker-end="url(#arrow-t5-accent)"/>
+              </svg></div>
+              <p class="diagram-caption">Fig. 1 — Three modules share one Postgres model; the whole app is Dockerized and deployed on Railway with Sentry monitoring.</p>
+            </div>
+          </section>
+
+          <section>
+            <h2><span class="num">04</span> Tech stack</h2>
+            <div class="badge-row">
+              <span class="tag">Django 5.2</span>
+              <span class="tag">HTMX</span>
+              <span class="tag">Alpine.js</span>
+              <span class="tag">Tailwind</span>
+              <span class="tag">Postgres</span>
+              <span class="tag">Docker</span>
+              <span class="tag">Railway</span>
+              <span class="tag">Sentry</span>
+            </div>
+          </section>
+
+          <section>
+            <h2><span class="num">05</span> Highlights</h2>
+            <ul role="list">
+              <li>Atomic per-week production planning with per-ingredient shrinkage-factor math built in.</li>
+              <li>Color-coded inventory alerts (red / yellow / green) driven by 7-day rolling demand.</li>
+              <li>Installable PWA for kitchen staff — thaw sheets and packing cards work on any phone.</li>
+              <li>Public, read-only client share links for meal plans without exposing the admin app.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2><span class="num">06</span> Status</h2>
+            <p>Live in production on Railway, running as an internal business tool. No public
+              link is shared since it operates on a real business's live operational data.</p>
+          </section>
+
+        </article>
+      </div>
+
+      <aside class="case-sidebar">
+        <div class="sidebar-block">
+          <p class="sidebar-label">Status</p>
+          <span class="status status-live">Live in production</span>
+        </div>
+        <div class="sidebar-block">
+          <p class="sidebar-label">Role</p>
+          <p style="color:var(--color-text);font-size:var(--text-sm);">Sole engineer — product, backend, frontend, deployment</p>
+        </div>
+        <div class="sidebar-block">
+          <p class="sidebar-label">Demo</p>
+          <p style="color:var(--color-text-muted);font-size:var(--text-sm);">No public link — internal business tool with live operational data</p>
+        </div>
+      </aside>
+    </section>
+
+    <div class="case-nav-footer">
+      <a href="./mom-comparison.html" class="btn btn-ghost">← Previous: MoM Comparison</a>
+      <a href="./agentic-app-workspace.html" class="btn btn-ghost">Next: Agentic App Workspace →</a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-lead">
+        <h2>Let's talk about your data platform.</h2>
+        <p>Open to senior data engineering, backend engineering, and AI/automation roles.</p>
+      </div>
+      <div class="footer-actions">
+        <!-- TODO: replace with your LinkedIn URL -->
+        <a href="#" class="btn btn-primary">Connect on LinkedIn</a>
+        <a href="mailto:carlos.salgado30@yahoo.com" class="footer-email">carlos.salgado30@yahoo.com</a>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <span>&copy; 2026 Carlos Salgado</span>
+      <span>Florida, USA</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

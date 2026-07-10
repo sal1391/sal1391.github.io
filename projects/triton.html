@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Triton — Fuel Contract Performance Tracker | Carlos Salgado</title>
+<meta name="description" content="Case study: Triton, a FastAPI + React platform that reconciles approved fuel supply contracts against real transaction data with server-side row-level security.">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,500&f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../index.html" class="brand" aria-label="Carlos Salgado — home">
+      <img src="../assets/mark.svg" alt="" class="brand-mark" width="34" height="34">
+      <span class="brand-name">carlos<span class="dim">.</span>salgado</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#skills">Skills</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container">
+
+    <section class="case-hero">
+      <a href="../index.html" class="back-link">Back to all projects</a>
+      <p class="case-kicker">Project 01 / Internal platform engineering tool</p>
+      <h1>Triton</h1>
+      <p class="case-oneliner">Full-stack platform that reconciles approved fuel supply contracts
+        against real transaction data, closing the loop between deal terms and actual performance.</p>
+      <div class="case-meta-row">
+        <span class="status status-prototype">Working local prototype</span>
+        <div class="badge-row">
+          <span class="tag">FastAPI</span>
+          <span class="tag">SQLAlchemy 2.0</span>
+          <span class="tag">Alembic</span>
+          <span class="tag">Postgres</span>
+          <span class="tag">React 19</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-body">
+      <div class="case-main">
+        <article>
+
+          <section>
+            <h2><span class="num">01</span> Problem</h2>
+            <p>Fuel supply contracts get approved in an external system that only captures
+              high-level terms — price, volume commitment, counterparty. Once a deal is signed,
+              there's no system that tracks whether the contract is actually performing: no way
+              to see contracted-vs-actual volume, no margin visibility, no gross profit rollup
+              against the terms that were negotiated. The deal desk and finance team had no
+              shared source of truth once ink hit paper.</p>
+          </section>
+
+          <section>
+            <h2><span class="num">02</span> Solution</h2>
+            <p>Triton is a FastAPI + React application that ingests approved contract headers,
+              lets the deal team maintain detailed bid lines against each contract, and
+              automatically maps every line to real transaction records. The result is a
+              performance report that shows contracted terms next to what actually happened —
+              volume, margin, and gross profit — with visibility scoped to each user's position
+              in the org hierarchy and enforced on the server for every single query, not just
+              in the UI.</p>
+          </section>
+
+          <section>
+            <h2><span class="num">03</span> Architecture</h2>
+            <p>Snowflake acts as the read-only source of truth for actual transactions and also
+              receives BI exports back out. Five scheduled sync jobs move data between Snowflake
+              and a Postgres operational store (Snowflake Postgres in production), which backs a
+              FastAPI API secured with JWT auth. A React single-page app consumes that API across
+              four functional surfaces: Bids, Mapping, Dashboard, and Admin.</p>
+            <div class="diagram-frame">
+              <div class="diagram-scroll"><svg viewBox="0 0 880 360" role="img" aria-label="Architecture diagram: Snowflake feeds five scheduled sync jobs into a Postgres operational store, which backs a FastAPI JWT API consumed by a React SPA with Bids, Mapping, Dashboard, and Admin modules.">
+                <defs>
+                  <marker id="arrow-t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0 0L10 5L0 10z" fill="#8b93a7"/>
+                  </marker>
+                  <marker id="arrow-t-accent" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0 0L10 5L0 10z" fill="#f5a524"/>
+                  </marker>
+                </defs>
+                <style>
+                  .node-rect{fill:#141926;stroke:#2a3244;stroke-width:1.5;rx:8;}
+                  .node-label{font-family:'JetBrains Mono',monospace;font-size:13px;fill:#e7eaf1;}
+                  .node-sub{font-family:'JetBrains Mono',monospace;font-size:10.5px;fill:#8b93a7;}
+                  .edge{stroke:#8b93a7;stroke-width:1.5;fill:none;}
+                  .edge-accent{stroke:#f5a524;stroke-width:1.7;fill:none;}
+                  .group-label{font-family:'JetBrains Mono',monospace;font-size:10px;fill:#565f74;letter-spacing:0.06em;}
+                </style>
+
+                <rect x="24" y="130" width="130" height="70" class="node-rect"/>
+                <text x="89" y="158" text-anchor="middle" class="node-label">Snowflake</text>
+                <text x="89" y="176" text-anchor="middle" class="node-sub">actuals + BI sink</text>
+
+                <path class="edge-accent" d="M154 155 H240" marker-end="url(#arrow-t-accent)"/>
+                <text x="197" y="145" text-anchor="middle" class="node-sub">read</text>
+
+                <rect x="240" y="60" width="180" height="190" class="node-rect" fill="#101420"/>
+                <text x="330" y="46" text-anchor="middle" class="group-label">5 SCHEDULED SYNC JOBS</text>
+                <rect x="260" y="80" width="140" height="34" class="node-rect"/>
+                <text x="330" y="101" text-anchor="middle" class="node-sub">contract sync</text>
+                <rect x="260" y="122" width="140" height="34" class="node-rect"/>
+                <text x="330" y="143" text-anchor="middle" class="node-sub">txn mapping sync</text>
+                <rect x="260" y="164" width="140" height="34" class="node-rect"/>
+                <text x="330" y="185" text-anchor="middle" class="node-sub">margin rollup sync</text>
+                <rect x="260" y="206" width="140" height="24" class="node-rect" opacity="0.6"/>
+                <text x="330" y="222" text-anchor="middle" class="node-sub" opacity="0.8">+2 more</text>
+
+                <path class="edge-accent" d="M420 155 H500" marker-end="url(#arrow-t-accent)"/>
+
+                <rect x="500" y="120" width="150" height="70" class="node-rect"/>
+                <text x="575" y="148" text-anchor="middle" class="node-label">Postgres</text>
+                <text x="575" y="166" text-anchor="middle" class="node-sub">operational store</text>
+
+                <path class="edge-accent" d="M650 155 H730" marker-end="url(#arrow-t-accent)"/>
+
+                <rect x="730" y="110" width="130" height="90" class="node-rect"/>
+                <text x="795" y="140" text-anchor="middle" class="node-label">FastAPI</text>
+                <text x="795" y="158" text-anchor="middle" class="node-sub">JWT auth</text>
+                <text x="795" y="176" text-anchor="middle" class="node-sub">row-level security</text>
+
+                <path class="edge" d="M795 200 V260" marker-end="url(#arrow-t)"/>
+
+                <rect x="240" y="280" width="490" height="60" class="node-rect" fill="#101420"/>
+                <text x="485" y="270" text-anchor="middle" class="group-label">REACT 19 SPA</text>
+                <text x="310" y="315" text-anchor="middle" class="node-sub">Bids</text>
+                <text x="425" y="315" text-anchor="middle" class="node-sub">Mapping</text>
+                <text x="540" y="315" text-anchor="middle" class="node-sub">Dashboard</text>
+                <text x="655" y="315" text-anchor="middle" class="node-sub">Admin</text>
+                <line x1="365" y1="292" x2="365" y2="328" stroke="#2a3244"/>
+                <line x1="480" y1="292" x2="480" y2="328" stroke="#2a3244"/>
+                <line x1="595" y1="292" x2="595" y2="328" stroke="#2a3244"/>
+              </svg></div>
+              <p class="diagram-caption">Fig. 1 — Data flows left to right: Snowflake actuals → scheduled sync jobs → Postgres → FastAPI (JWT + RLS) → React SPA.</p>
+            </div>
+          </section>
+
+          <section>
+            <h2><span class="num">04</span> Tech stack</h2>
+            <div class="badge-row">
+              <span class="tag">FastAPI</span>
+              <span class="tag">SQLAlchemy 2.0</span>
+              <span class="tag">Alembic</span>
+              <span class="tag">sqladmin</span>
+              <span class="tag">APScheduler</span>
+              <span class="tag">Postgres</span>
+              <span class="tag">React 19</span>
+              <span class="tag">Vite</span>
+              <span class="tag">TanStack Query</span>
+              <span class="tag">MUI / MUI X Data Grid</span>
+              <span class="tag">Auth0 (planned)</span>
+              <span class="tag">Snowflake</span>
+            </div>
+          </section>
+
+          <section>
+            <h2><span class="num">05</span> Highlights</h2>
+            <ul role="list">
+              <li>Five scheduled data-sync jobs keeping the operational store aligned with Snowflake actuals.</li>
+              <li>Server-side org-subtree row-level security enforced on every query, not just the UI.</li>
+              <li>Admin panel built on sqladmin for internal data management without custom tooling.</li>
+              <li>Clean JSON + JWT API contract between the FastAPI backend and React frontend.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2><span class="num">06</span> Status</h2>
+            <p>Working local prototype — the core flow (bids, LIFT mapping, dashboard, org tree +
+              row-level security, access model) is built and running end-to-end. Snowflake
+              integration and Auth0 login are the remaining phases before a production rollout.
+              A live demo isn't available since the app connects to internal company data in
+              Snowflake.</p>
+          </section>
+
+        </article>
+      </div>
+
+      <aside class="case-sidebar">
+        <div class="sidebar-block">
+          <p class="sidebar-label">Status</p>
+          <span class="status status-prototype">Working local prototype</span>
+        </div>
+        <div class="sidebar-block">
+          <p class="sidebar-label">Role</p>
+          <p style="color:var(--color-text);font-size:var(--text-sm);">Sole engineer — design, backend, frontend, data model</p>
+        </div>
+        <div class="sidebar-block">
+          <p class="sidebar-label">Demo</p>
+          <p style="color:var(--color-text-muted);font-size:var(--text-sm);">Unavailable — connects to internal company data (Snowflake)</p>
+        </div>
+      </aside>
+    </section>
+
+    <div class="case-nav-footer">
+      <a href="../index.html" class="back-link">Back to all projects</a>
+      <a href="./tm1-finance-agent.html" class="btn btn-ghost">Next: TM1 Finance Agent →</a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-lead">
+        <h2>Let's talk about your data platform.</h2>
+        <p>Open to senior data engineering, backend engineering, and AI/automation roles.</p>
+      </div>
+      <div class="footer-actions">
+        <!-- TODO: replace with your LinkedIn URL -->
+        <a href="#" class="btn btn-primary">Connect on LinkedIn</a>
+        <a href="mailto:carlos.salgado30@yahoo.com" class="footer-email">carlos.salgado30@yahoo.com</a>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <span>&copy; 2026 Carlos Salgado</span>
+      <span>Florida, USA</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

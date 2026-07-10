@@ -1,0 +1,96 @@
+/* tokens.css — design system for Carlos Salgado portfolio
+   Concept: senior data/backend engineer. Dark technical aesthetic —
+   deep charcoal-navy surfaces, one electric amber accent, monospace
+   for tech tags / system labels, grotesk sans for body & display. */
+
+:root,
+[data-theme='dark'] {
+  /* Surfaces — charcoal-navy, layered */
+  --color-bg: #0b0e14;
+  --color-surface: #101420;
+  --color-surface-2: #141926;
+  --color-surface-offset: #171d2c;
+  --color-surface-offset-2: #1c2333;
+  --color-surface-dynamic: #232b3d;
+  --color-divider: #1f2635;
+  --color-border: #2a3244;
+
+  /* Text */
+  --color-text: #e7eaf1;
+  --color-text-muted: #8b93a7;
+  --color-text-faint: #565f74;
+  --color-text-inverse: #0b0e14;
+
+  /* Primary accent — electric amber */
+  --color-primary: #f5a524;
+  --color-primary-hover: #ffb84d;
+  --color-primary-active: #d98d10;
+  --color-primary-highlight: #3a2e15;
+
+  /* Secondary data-viz hues (diagrams only, used sparingly) */
+  --color-blue: #5b9dd9;
+  --color-blue-highlight: #182333;
+  --color-success: #55b579;
+  --color-success-highlight: #16261c;
+  --color-warning: #e0824a;
+  --color-warning-highlight: #2e2016;
+  --color-error: #e0607a;
+  --color-error-highlight: #2c1a20;
+  --color-purple: #9a83e0;
+
+  /* Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-interactive: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Shadows — tuned dark, subtle amber glow at high elevation */
+  --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.35);
+  --shadow-md: 0 6px 20px oklch(0 0 0 / 0.45);
+  --shadow-lg: 0 18px 48px oklch(0 0 0 / 0.55);
+
+  /* Content widths */
+  --content-narrow: 640px;
+  --content-default: 960px;
+  --content-wide: 1200px;
+  --content-full: 100%;
+
+  /* Fonts */
+  --font-display: 'Cabinet Grotesk', 'General Sans', 'Segoe UI', sans-serif;
+  --font-body: 'General Sans', 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+
+  /* Type scale — fluid clamp() */
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+  --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+  --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+  --text-3xl: clamp(2.5rem, 1rem + 4vw, 4.75rem);
+
+  /* Spacing — 4px base */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+}
+
+/* This site is intentionally dark-only (technical/engineer aesthetic
+   requested in the brief) — no light mode toggle is provided. */

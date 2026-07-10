@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MoM Comparison — Agentic SQL Analyst | Carlos Salgado</title>
+<meta name="description" content="Case study: an LLM agent that writes its own SQL to compare month-over-month performance from a versioned skills playbook, with zero hardcoded business logic.">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,500&f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../index.html" class="brand" aria-label="Carlos Salgado — home">
+      <img src="../assets/mark.svg" alt="" class="brand-mark" width="34" height="34">
+      <span class="brand-name">carlos<span class="dim">.</span>salgado</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#skills">Skills</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container">
+
+    <section class="case-hero">
+      <a href="../index.html" class="back-link">Back to all projects</a>
+      <p class="case-kicker">Project 04 / Agentic analytics</p>
+      <h1>MoM Comparison</h1>
+      <p class="case-oneliner">A self-directed analytics agent that writes its own SQL to compare
+        month-over-month performance and explain what changed — and why.</p>
+      <div class="case-meta-row">
+        <span class="status status-prototype">Working app</span>
+        <div class="badge-row">
+          <span class="tag">Python</span>
+          <span class="tag">Streamlit</span>
+          <span class="tag">Snowflake</span>
+          <span class="tag">Azure AI Foundry</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-body">
+      <div class="case-main">
+        <article>
+
+          <section>
+            <h2><span class="num">01</span> Problem</h2>
+            <p>The recurring "how did we do vs. last month" question normally meant an analyst
+              manually writing comparison SQL and rebuilding the same charts every single cycle —
+              a repetitive, error-prone task that consumed hours of skilled analyst time on work
+              that followed the same pattern every month.</p>
+          </section>
+
+          <section>
+            <h2><span class="num">02</span> Solution</h2>
+            <p>An LLM agent reads a versioned "skills" playbook — data model, SQL patterns, and
+              analysis templates — at runtime, dynamically generates SQL, executes it against
+              Snowflake, and produces KPI deltas, waterfall charts, and narrative insights, with
+              zero hardcoded SQL or business logic in the application itself. The agent also
+              supports natural-language follow-up questions on top of the initial comparison.</p>
+          </section>
+
+          <section>
+            <h2><span class="num">03</span> Architecture</h2>
+            <p>A chat UI passes the user's question to an Agent Orchestrator, which reads the
+              versioned <code style="font-family:var(--font-mono);font-size:0.95em;">skills/</code>
+              playbook, calls an LLM (Snowflake Cortex or Azure, swappable) to generate SQL,
+              executes that SQL on Snowflake, and renders the result as KPIs, charts, and
+              narrative — closing the loop back to the chat for follow-up questions.</p>
+            <div class="diagram-frame">
+              <div class="diagram-scroll"><svg viewBox="0 0 880 300" role="img" aria-label="Architecture diagram: chat UI sends a question to an agent orchestrator, which reads a skills playbook, calls a swappable LLM to generate SQL, executes it on Snowflake, and renders KPIs, charts, and narrative back to the chat.">
+                <defs>
+                  <marker id="arrow-t4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0 0L10 5L0 10z" fill="#8b93a7"/>
+                  </marker>
+                  <marker id="arrow-t4-accent" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0 0L10 5L0 10z" fill="#f5a524"/>
+                  </marker>
+                </defs>
+                <style>
+                  .node-rect{fill:#141926;stroke:#2a3244;stroke-width:1.5;}
+                  .node-label{font-family:'JetBrains Mono',monospace;font-size:12.5px;fill:#e7eaf1;}
+                  .node-sub{font-family:'JetBrains Mono',monospace;font-size:10px;fill:#8b93a7;}
+                  .edge{stroke:#8b93a7;stroke-width:1.5;fill:none;}
+                  .edge-accent{stroke:#f5a524;stroke-width:1.7;fill:none;}
+                  .group-label{font-family:'JetBrains Mono',monospace;font-size:10px;fill:#565f74;letter-spacing:0.06em;}
+                </style>
+
+                <rect x="20" y="110" width="130" height="60" rx="8" class="node-rect"/>
+                <text x="85" y="136" text-anchor="middle" class="node-label">Chat UI</text>
+                <text x="85" y="154" text-anchor="middle" class="node-sub">user question</text>
+
+                <path class="edge-accent" d="M150 140 H222" marker-end="url(#arrow-t4-accent)"/>
+
+                <rect x="222" y="90" width="170" height="100" rx="8" class="node-rect"/>
+                <text x="307" y="120" text-anchor="middle" class="node-label">Agent</text>
+                <text x="307" y="138" text-anchor="middle" class="node-label">Orchestrator</text>
+                <text x="307" y="160" text-anchor="middle" class="node-sub">reads skills/ playbook</text>
+
+                <path class="edge-accent" d="M392 130 H470" marker-end="url(#arrow-t4-accent)"/>
+
+                <rect x="470" y="30" width="150" height="60" rx="8" class="node-rect"/>
+                <text x="545" y="56" text-anchor="middle" class="node-label">LLM</text>
+                <text x="545" y="74" text-anchor="middle" class="node-sub">Cortex / Azure</text>
+
+                <path class="edge" d="M545 90 V116" marker-end="none"/>
+                <text x="600" y="106" text-anchor="middle" class="node-sub">generates SQL</text>
+
+                <path class="edge-accent" d="M470 150 H392" marker-end="none" opacity="0"/>
+                <path class="edge-accent" d="M620 60 H700" marker-end="none"/>
+                <path class="edge-accent" d="M700 60 V150 H660" marker-end="url(#arrow-t4-accent)"/>
+
+                <rect x="660" y="120" width="160" height="60" rx="8" class="node-rect"/>
+                <text x="740" y="146" text-anchor="middle" class="node-label">Snowflake</text>
+                <text x="740" y="164" text-anchor="middle" class="node-sub">executes SQL</text>
+
+                <path class="edge" d="M740 180 V220 H400 V190" marker-end="url(#arrow-t4)"/>
+
+                <rect x="240" y="220" width="320" height="60" rx="8" fill="#101420" stroke="#2a3244"/>
+                <text x="400" y="246" text-anchor="middle" class="node-label">KPIs · waterfall charts · narrative</text>
+                <text x="400" y="264" text-anchor="middle" class="node-sub">rendered back to chat for follow-ups</text>
+              </svg></div>
+              <p class="diagram-caption">Fig. 1 — Orchestrator reads the skills playbook, delegates SQL generation to a swappable LLM, executes on Snowflake, renders results back to chat.</p>
+            </div>
+          </section>
+
+          <section>
+            <h2><span class="num">04</span> Tech stack</h2>
+            <div class="badge-row">
+              <span class="tag">Python</span>
+              <span class="tag">Streamlit</span>
+              <span class="tag">Snowflake</span>
+              <span class="tag">Swappable LLM (Cortex / Azure AI Foundry)</span>
+              <span class="tag">Docs-as-knowledge-base "skills" architecture</span>
+            </div>
+          </section>
+
+          <section>
+            <h2><span class="num">05</span> Highlights</h2>
+            <ul role="list">
+              <li>All domain knowledge lives in editable markdown playbooks — no hardcoded SQL anywhere in the app.</li>
+              <li>Conversational follow-ups, e.g. "Why did GP drop for Customer X?"</li>
+              <li>Side-by-side comparison views plus waterfall charts showing the change itself.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2><span class="num">06</span> Status</h2>
+            <p>Working app. A live demo isn't available since the agent connects to internal
+              company data in Snowflake.</p>
+          </section>
+
+        </article>
+      </div>
+
+      <aside class="case-sidebar">
+        <div class="sidebar-block">
+          <p class="sidebar-label">Status</p>
+          <span class="status status-prototype">Working app</span>
+        </div>
+        <div class="sidebar-block">
+          <p class="sidebar-label">Role</p>
+          <p style="color:var(--color-text);font-size:var(--text-sm);">Sole engineer — playbook design, agent orchestration, chart rendering</p>
+        </div>
+        <div class="sidebar-block">
+          <p class="sidebar-label">Demo</p>
+          <p style="color:var(--color-text-muted);font-size:var(--text-sm);">Unavailable — connects to internal company data (Snowflake)</p>
+        </div>
+      </aside>
+    </section>
+
+    <div class="case-nav-footer">
+      <a href="./poseidon.html" class="btn btn-ghost">← Previous: Poseidon</a>
+      <a href="./meal-prep-ops.html" class="btn btn-ghost">Next: Meal Prep Ops →</a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-lead">
+        <h2>Let's talk about your data platform.</h2>
+        <p>Open to senior data engineering, backend engineering, and AI/automation roles.</p>
+      </div>
+      <div class="footer-actions">
+        <!-- TODO: replace with your LinkedIn URL -->
+        <a href="#" class="btn btn-primary">Connect on LinkedIn</a>
+        <a href="mailto:carlos.salgado30@yahoo.com" class="footer-email">carlos.salgado30@yahoo.com</a>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <span>&copy; 2026 Carlos Salgado</span>
+      <span>Florida, USA</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

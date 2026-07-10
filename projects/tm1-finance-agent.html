@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TM1 Finance Agent — Conversational Finance Assistant | Carlos Salgado</title>
+<meta name="description" content="Case study: a skill-based orchestrator that answers executive finance questions with proof-first, chart-backed evidence from Snowflake.">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,500&f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../index.html" class="brand" aria-label="Carlos Salgado — home">
+      <img src="../assets/mark.svg" alt="" class="brand-mark" width="34" height="34">
+      <span class="brand-name">carlos<span class="dim">.</span>salgado</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#skills">Skills</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container">
+
+    <section class="case-hero">
+      <a href="../index.html" class="back-link">Back to all projects</a>
+      <p class="case-kicker">Project 02 / Agentic AI for finance</p>
+      <h1>TM1 Finance Agent</h1>
+      <p class="case-oneliner">Conversational finance assistant that lets executives ask natural-language
+        questions — "What was GP for FY2025?" — and get proof-first, chart-backed answers straight
+        from the company's official planning hierarchy.</p>
+      <div class="case-meta-row">
+        <span class="status status-internal">Demo unavailable — internal data</span>
+        <div class="badge-row">
+          <span class="tag">Python</span>
+          <span class="tag">Snowflake Cortex</span>
+          <span class="tag">Snowpark</span>
+          <span class="tag">Azure OpenAI</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-body">
+      <div class="case-main">
+        <article>
+
+          <section>
+            <h2><span class="num">01</span> Problem</h2>
+            <p>Leadership needs fast, trustworthy answers to finance questions without waiting on
+              an analyst to hand-write a query against a complex planning hierarchy. Every ad-hoc
+              question — "what was gross profit last quarter," "how does this compare to plan" —
+              turned into a multi-hour turnaround, and the answer's trustworthiness depended
+              entirely on whoever wrote the query.</p>
+          </section>
+
+          <section>
+            <h2><span class="num">02</span> Solution</h2>
+            <p>A chat application backed by a skill-based orchestrator — Intent Classifier, then
+              Planner, then Step Executor — that resolves natural language into the correct
+              hierarchy nodes and time periods, queries Snowflake, and returns an evidence-first
+              answer: proof of exactly what was queried, a narrative summary, bullet insights, and
+              suggested follow-ups. The agent keeps conversational memory across turns, so a
+              follow-up like "compare against prior year quarter" resolves correctly without the
+              user restating context.</p>
+          </section>
+
+          <section>
+            <h2><span class="num">03</span> Architecture</h2>
+            <p>A user question enters the Orchestrator, which runs it through three stages —
+              Intent Classifier, Planner, Step Executor — before handing off to three supporting
+              services: Taxonomy, Synonym, and Time Resolution. Those services translate business
+              language into exact hierarchy nodes and periods, which the Step Executor uses to
+              query Snowflake directly.</p>
+            <div class="diagram-frame">
+              <div class="diagram-scroll"><svg viewBox="0 0 880 340" role="img" aria-label="Architecture diagram: a user question flows into an orchestrator composed of Intent Classifier, Planner, and Step Executor stages, which call Taxonomy, Synonym, and Time Resolution services before querying Snowflake.">
+                <defs>
+                  <marker id="arrow-t2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0 0L10 5L0 10z" fill="#8b93a7"/>
+                  </marker>
+                  <marker id="arrow-t2-accent" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0 0L10 5L0 10z" fill="#f5a524"/>
+                  </marker>
+                </defs>
+                <style>
+                  .node-rect{fill:#141926;stroke:#2a3244;stroke-width:1.5;}
+                  .node-label{font-family:'JetBrains Mono',monospace;font-size:13px;fill:#e7eaf1;}
+                  .node-sub{font-family:'JetBrains Mono',monospace;font-size:10.5px;fill:#8b93a7;}
+                  .edge{stroke:#8b93a7;stroke-width:1.5;fill:none;}
+                  .edge-accent{stroke:#f5a524;stroke-width:1.7;fill:none;}
+                  .group-label{font-family:'JetBrains Mono',monospace;font-size:10px;fill:#565f74;letter-spacing:0.06em;}
+                </style>
+
+                <rect x="20" y="140" width="120" height="60" rx="8" class="node-rect"/>
+                <text x="80" y="166" text-anchor="middle" class="node-label">User</text>
+                <text x="80" y="184" text-anchor="middle" class="node-sub">question</text>
+
+                <path class="edge-accent" d="M140 170 H210" marker-end="url(#arrow-t2-accent)"/>
+
+                <rect x="210" y="40" width="330" height="180" rx="10" fill="#101420" stroke="#2a3244"/>
+                <text x="375" y="28" text-anchor="middle" class="group-label">ORCHESTRATOR</text>
+
+                <rect x="232" y="66" width="90" height="60" rx="8" class="node-rect"/>
+                <text x="277" y="92" text-anchor="middle" class="node-sub">Intent</text>
+                <text x="277" y="108" text-anchor="middle" class="node-sub">Classifier</text>
+
+                <path class="edge" d="M322 96 H358" marker-end="url(#arrow-t2)"/>
+
+                <rect x="358" y="66" width="90" height="60" rx="8" class="node-rect"/>
+                <text x="403" y="92" text-anchor="middle" class="node-sub">Planner</text>
+
+                <path class="edge" d="M448 96 H484" marker-end="url(#arrow-t2)"/>
+
+                <rect x="422" y="150" width="96" height="60" rx="8" class="node-rect"/>
+                <text x="470" y="176" text-anchor="middle" class="node-sub">Step</text>
+                <text x="470" y="192" text-anchor="middle" class="node-sub">Executor</text>
+
+                <path class="edge" d="M403 126 V150 H470" marker-end="none" fill="none" stroke="#8b93a7" stroke-width="1.5"/>
+
+                <path class="edge-accent" d="M540 180 H620" marker-end="url(#arrow-t2-accent)"/>
+
+                <rect x="620" y="60" width="180" height="180" rx="10" fill="#101420" stroke="#2a3244"/>
+                <text x="710" y="48" text-anchor="middle" class="group-label">SERVICES</text>
+                <rect x="640" y="80" width="140" height="34" rx="6" class="node-rect"/>
+                <text x="710" y="101" text-anchor="middle" class="node-sub">Taxonomy Service</text>
+                <rect x="640" y="122" width="140" height="34" rx="6" class="node-rect"/>
+                <text x="710" y="143" text-anchor="middle" class="node-sub">Synonym Service</text>
+                <rect x="640" y="164" width="140" height="34" rx="6" class="node-rect"/>
+                <text x="710" y="185" text-anchor="middle" class="node-sub">Time Resolution</text>
+
+                <path class="edge-accent" d="M710 240 V270" marker-end="url(#arrow-t2-accent)"/>
+
+                <rect x="600" y="270" width="220" height="56" rx="8" class="node-rect"/>
+                <text x="710" y="300" text-anchor="middle" class="node-label">Snowflake</text>
+                <text x="710" y="316" text-anchor="middle" class="node-sub">planning hierarchy</text>
+              </svg></div>
+              <p class="diagram-caption">Fig. 1 — Orchestrator resolves intent and plan, calls Taxonomy / Synonym / Time services, then executes against Snowflake.</p>
+            </div>
+          </section>
+
+          <section>
+            <h2><span class="num">04</span> Tech stack</h2>
+            <div class="badge-row">
+              <span class="tag">Python</span>
+              <span class="tag">Streamlit-style chat UI</span>
+              <span class="tag">Snowflake Cortex</span>
+              <span class="tag">Snowpark</span>
+              <span class="tag">Azure OpenAI (fallback)</span>
+              <span class="tag">Custom taxonomy / synonym / time services</span>
+            </div>
+          </section>
+
+          <section>
+            <h2><span class="num">05</span> Highlights</h2>
+            <ul role="list">
+              <li>Proof-first answer format — shows the exact query that was run before narrating the result.</li>
+              <li>Multi-turn conversational memory, so follow-ups like "compare against prior year quarter" resolve correctly.</li>
+              <li>Dynamic pivot-table and line-chart generation driven entirely by natural language.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2><span class="num">06</span> Status</h2>
+            <p>Production-grade agent architecture, fully aware of the underlying semantic layer.
+              A live demo isn't available since the agent connects to internal company data in
+              Snowflake.</p>
+          </section>
+
+        </article>
+      </div>
+
+      <aside class="case-sidebar">
+        <div class="sidebar-block">
+          <p class="sidebar-label">Status</p>
+          <span class="status status-internal">Production-grade agent</span>
+        </div>
+        <div class="sidebar-block">
+          <p class="sidebar-label">Role</p>
+          <p style="color:var(--color-text);font-size:var(--text-sm);">Sole engineer — orchestrator design, service layer, Snowflake integration</p>
+        </div>
+        <div class="sidebar-block">
+          <p class="sidebar-label">Demo</p>
+          <p style="color:var(--color-text-muted);font-size:var(--text-sm);">Unavailable — connects to internal company data (Snowflake)</p>
+        </div>
+      </aside>
+    </section>
+
+    <div class="case-nav-footer">
+      <a href="./triton.html" class="btn btn-ghost">← Previous: Triton</a>
+      <a href="./poseidon.html" class="btn btn-ghost">Next: Poseidon →</a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-lead">
+        <h2>Let's talk about your data platform.</h2>
+        <p>Open to senior data engineering, backend engineering, and AI/automation roles.</p>
+      </div>
+      <div class="footer-actions">
+        <!-- TODO: replace with your LinkedIn URL -->
+        <a href="#" class="btn btn-primary">Connect on LinkedIn</a>
+        <a href="mailto:carlos.salgado30@yahoo.com" class="footer-email">carlos.salgado30@yahoo.com</a>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <span>&copy; 2026 Carlos Salgado</span>
+      <span>Florida, USA</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

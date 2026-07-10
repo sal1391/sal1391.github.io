@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Poseidon — AI Strategic Intelligence Dashboard | Carlos Salgado</title>
+<meta name="description" content="Case study: a 3-agent AI system fusing live web research, LLM synthesis, and internal sales data into one strategic account-intelligence dashboard.">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,500&f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../index.html" class="brand" aria-label="Carlos Salgado — home">
+      <img src="../assets/mark.svg" alt="" class="brand-mark" width="34" height="34">
+      <span class="brand-name">carlos<span class="dim">.</span>salgado</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#skills">Skills</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container">
+
+    <section class="case-hero">
+      <a href="../index.html" class="back-link">Back to all projects</a>
+      <p class="case-kicker">Project 03 / Multi-agent AI system</p>
+      <h1>Poseidon</h1>
+      <p class="case-oneliner">A 3-agent AI system that fuses live web research, LLM synthesis, and
+        internal sales data into one strategic account-intelligence dashboard.</p>
+      <div class="case-meta-row">
+        <span class="status status-prototype">Working app · dual deploy modes</span>
+        <div class="badge-row">
+          <span class="tag">Streamlit</span>
+          <span class="tag">Snowflake Cortex</span>
+          <span class="tag">Claude Sonnet 4.5</span>
+          <span class="tag">Auth0</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-body">
+      <div class="case-main">
+        <article>
+
+          <section>
+            <h2><span class="num">01</span> Problem</h2>
+            <p>Sales teams need a fast read on a prospect or account — market position,
+              competitive posture, sustainability profile — without manually stitching together
+              five different tools before every important call. That prep work was slow,
+              inconsistent between reps, and rarely grounded in the company's own historical
+              sales data.</p>
+          </section>
+
+          <section>
+            <h2><span class="num">02</span> Solution</h2>
+            <p>Three cooperating agents run inside a dashboard with progressive result rendering.
+              Agent 1 (Contextualizer) pulls internal analysis from Snowflake Cortex. Agent 2
+              (Researcher) layers in real-time web research. Agent 3 (Strategist) synthesizes
+              both into a sales strategy, which can be exported to PDF or Markdown for use
+              outside the tool.</p>
+          </section>
+
+          <section>
+            <h2><span class="num">03</span> Architecture</h2>
+            <p>The Contextualizer and Strategist both run on Snowflake Cortex; the Researcher adds
+              a live web-research API on top of Cortex. An orchestrator sequences the three agents
+              and streams results into a Streamlit dashboard as each stage completes, then hands
+              the final synthesis to a PDF/Markdown export step.</p>
+            <div class="diagram-frame">
+              <div class="diagram-scroll"><svg viewBox="0 0 880 320" role="img" aria-label="Architecture diagram: Contextualizer, Researcher, and Strategist agents feed an orchestrator, which streams progressive results into a Streamlit dashboard with PDF and Markdown export.">
+                <defs>
+                  <marker id="arrow-t3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0 0L10 5L0 10z" fill="#8b93a7"/>
+                  </marker>
+                  <marker id="arrow-t3-accent" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0 0L10 5L0 10z" fill="#f5a524"/>
+                  </marker>
+                </defs>
+                <style>
+                  .node-rect{fill:#141926;stroke:#2a3244;stroke-width:1.5;}
+                  .node-label{font-family:'JetBrains Mono',monospace;font-size:12.5px;fill:#e7eaf1;}
+                  .node-sub{font-family:'JetBrains Mono',monospace;font-size:10px;fill:#8b93a7;}
+                  .edge{stroke:#8b93a7;stroke-width:1.5;fill:none;}
+                  .edge-accent{stroke:#f5a524;stroke-width:1.7;fill:none;}
+                  .group-label{font-family:'JetBrains Mono',monospace;font-size:10px;fill:#565f74;letter-spacing:0.06em;}
+                </style>
+
+                <rect x="20" y="24" width="170" height="64" rx="8" class="node-rect"/>
+                <text x="105" y="50" text-anchor="middle" class="node-label">Contextualizer</text>
+                <text x="105" y="68" text-anchor="middle" class="node-sub">Snowflake Cortex</text>
+
+                <rect x="20" y="128" width="170" height="64" rx="8" class="node-rect"/>
+                <text x="105" y="154" text-anchor="middle" class="node-label">Researcher</text>
+                <text x="105" y="172" text-anchor="middle" class="node-sub">live web + Cortex</text>
+
+                <rect x="20" y="232" width="170" height="64" rx="8" class="node-rect"/>
+                <text x="105" y="258" text-anchor="middle" class="node-label">Strategist</text>
+                <text x="105" y="276" text-anchor="middle" class="node-sub">Cortex synthesis</text>
+
+                <path class="edge-accent" d="M190 56 H330 V150" marker-end="none"/>
+                <path class="edge-accent" d="M190 160 H330" marker-end="none"/>
+                <path class="edge-accent" d="M190 264 H330 V170" marker-end="url(#arrow-t3-accent)"/>
+
+                <rect x="330" y="120" width="150" height="80" rx="8" fill="#101420" stroke="#2a3244"/>
+                <text x="405" y="152" text-anchor="middle" class="node-label">Orchestrator</text>
+                <text x="405" y="170" text-anchor="middle" class="node-sub">typed schemas</text>
+                <text x="405" y="186" text-anchor="middle" class="node-sub">per agent call</text>
+
+                <path class="edge-accent" d="M480 160 H560" marker-end="url(#arrow-t3-accent)"/>
+
+                <rect x="560" y="110" width="180" height="100" rx="8" class="node-rect"/>
+                <text x="650" y="140" text-anchor="middle" class="node-label">Streamlit</text>
+                <text x="650" y="158" text-anchor="middle" class="node-sub">dashboard</text>
+                <text x="650" y="176" text-anchor="middle" class="node-sub">progressive display</text>
+
+                <path class="edge" d="M650 210 V240" marker-end="url(#arrow-t3)"/>
+
+                <rect x="540" y="240" width="220" height="50" rx="8" class="node-rect"/>
+                <text x="650" y="270" text-anchor="middle" class="node-sub">PDF / Markdown export</text>
+              </svg></div>
+              <p class="diagram-caption">Fig. 1 — Three agents feed a typed orchestrator; results stream progressively into the dashboard, then export.</p>
+            </div>
+          </section>
+
+          <section>
+            <h2><span class="num">04</span> Tech stack</h2>
+            <div class="badge-row">
+              <span class="tag">Python</span>
+              <span class="tag">Streamlit</span>
+              <span class="tag">Snowflake Cortex (Claude Sonnet 4.5)</span>
+              <span class="tag">Live web-research API</span>
+              <span class="tag">Auth0</span>
+              <span class="tag">WeasyPrint</span>
+              <span class="tag">Typed JSON schemas</span>
+            </div>
+          </section>
+
+          <section>
+            <h2><span class="num">05</span> Highlights</h2>
+            <ul role="list">
+              <li>Multi-agent orchestration with a typed JSON schema enforced on every agent call.</li>
+              <li>Dual local/AWS deploy modes supported from the same codebase.</li>
+              <li>Full integration test suite per agent — each agent independently testable in isolation.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2><span class="num">06</span> Status</h2>
+            <p>Working app with dual deploy modes. A live demo isn't available since the app
+              connects to internal company data in Snowflake.</p>
+          </section>
+
+        </article>
+      </div>
+
+      <aside class="case-sidebar">
+        <div class="sidebar-block">
+          <p class="sidebar-label">Status</p>
+          <span class="status status-prototype">Working app</span>
+        </div>
+        <div class="sidebar-block">
+          <p class="sidebar-label">Role</p>
+          <p style="color:var(--color-text);font-size:var(--text-sm);">Sole engineer — agent design, orchestration, dashboard, export pipeline</p>
+        </div>
+        <div class="sidebar-block">
+          <p class="sidebar-label">Demo</p>
+          <p style="color:var(--color-text-muted);font-size:var(--text-sm);">Unavailable — connects to internal company data (Snowflake)</p>
+        </div>
+      </aside>
+    </section>
+
+    <div class="case-nav-footer">
+      <a href="./tm1-finance-agent.html" class="btn btn-ghost">← Previous: TM1 Finance Agent</a>
+      <a href="./mom-comparison.html" class="btn btn-ghost">Next: MoM Comparison →</a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-lead">
+        <h2>Let's talk about your data platform.</h2>
+        <p>Open to senior data engineering, backend engineering, and AI/automation roles.</p>
+      </div>
+      <div class="footer-actions">
+        <!-- TODO: replace with your LinkedIn URL -->
+        <a href="#" class="btn btn-primary">Connect on LinkedIn</a>
+        <a href="mailto:carlos.salgado30@yahoo.com" class="footer-email">carlos.salgado30@yahoo.com</a>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <span>&copy; 2026 Carlos Salgado</span>
+      <span>Florida, USA</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
