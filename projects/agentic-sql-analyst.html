@@ -40,18 +40,21 @@
 
     <section class="case-hero">
       <a href="../index.html" class="back-link">Back to all projects</a>
-      <p class="case-kicker">Project 04 / Agentic analytics</p>
+      <p class="case-kicker">Project 03 / Agentic analytics</p>
       <h1>Agentic SQL Analyst</h1>
       <p class="case-oneliner">A self-directed analytics agent that writes its own SQL to compare
         month-over-month performance and explain what changed — and why.</p>
       <div class="case-meta-row">
-        <span class="status status-prototype">Working app</span>
+        <span class="status status-live">Live demo</span>
         <div class="badge-row">
           <span class="tag">Python</span>
           <span class="tag">Streamlit</span>
           <span class="tag">Snowflake</span>
           <span class="tag">Azure AI Foundry</span>
         </div>
+      </div>
+      <div class="case-meta-row">
+        <a href="#live-demo" class="btn btn-primary">Try the live demo ↓</a>
       </div>
     </section>
 
@@ -162,8 +165,24 @@
 
           <section>
             <h2><span class="num">06</span> Status</h2>
-            <p>Working app. A live demo isn't available since the agent connects to internal
-              company data in Snowflake.</p>
+            <p>Working app, deployed with a live, interactive demo below.</p>
+          </section>
+
+          <section id="live-demo">
+            <h2><span class="num">07</span> Live demo</h2>
+            <p>Try it yourself. A few things to try asking:</p>
+            <div class="prompt-pills">
+              <span class="prompt-pill">"How did we do this month vs. last month?"</span>
+              <span class="prompt-pill">"Why did gross profit drop for Customer X?"</span>
+              <span class="prompt-pill">"What are the top 5 KPI changes and what drove them?"</span>
+            </div>
+            <div class="demo-embed">
+              <div class="demo-embed-bar">
+                <span class="demo-embed-url">app-production-86d4.up.railway.app</span>
+                <a href="https://app-production-86d4.up.railway.app/" target="_blank" rel="noopener">Open in new tab ↗</a>
+              </div>
+              <iframe src="https://app-production-86d4.up.railway.app/" title="Agentic SQL Analyst — live demo" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
           </section>
 
         </article>
@@ -172,22 +191,18 @@
       <aside class="case-sidebar">
         <div class="sidebar-block">
           <p class="sidebar-label">Status</p>
-          <span class="status status-prototype">Working app</span>
+          <span class="status status-live">Live demo</span>
         </div>
         <div class="sidebar-block">
           <p class="sidebar-label">Role</p>
           <p style="color:var(--color-text);font-size:var(--text-sm);">Sole engineer — playbook design, agent orchestration, chart rendering</p>
         </div>
-        <div class="sidebar-block">
-          <p class="sidebar-label">Demo</p>
-          <p style="color:var(--color-text-muted);font-size:var(--text-sm);">Unavailable — connects to internal company data (Snowflake)</p>
-        </div>
       </aside>
     </section>
 
     <div class="case-nav-footer">
-      <a href="./sales-intel.html" class="btn btn-ghost">← Previous: Sales Intel</a>
-      <a href="./meal-prep-ops.html" class="btn btn-ghost">Next: Meal Prep Ops →</a>
+      <a href="./agentic-app-workspace.html" class="btn btn-ghost">← Previous: Agentic App Workspace</a>
+      <a href="./contract-performance-tracker.html" class="btn btn-ghost">Next: Contract Performance Tracker →</a>
     </div>
 
   </div>

@@ -40,18 +40,22 @@
 
     <section class="case-hero">
       <a href="../index.html" class="back-link">Back to all projects</a>
-      <p class="case-kicker">Project 03 / Multi-agent AI system</p>
+      <p class="case-kicker">Project 05 / Multi-agent AI system</p>
       <h1>Sales Intel</h1>
       <p class="case-oneliner">A 3-agent AI system that fuses live web research, LLM synthesis, and
         internal sales data into one strategic account-intelligence dashboard.</p>
       <div class="case-meta-row">
-        <span class="status status-prototype">Working app · dual deploy modes</span>
+        <span class="status status-live">Live demo</span>
         <div class="badge-row">
           <span class="tag">Streamlit</span>
           <span class="tag">Snowflake Cortex</span>
           <span class="tag">Claude Sonnet 4.5</span>
+          <span class="tag">Perplexity</span>
           <span class="tag">Auth0</span>
         </div>
+      </div>
+      <div class="case-meta-row">
+        <a href="#live-demo" class="btn btn-primary">Try the live demo ↓</a>
       </div>
     </section>
 
@@ -72,7 +76,7 @@
             <h2><span class="num">02</span> Solution</h2>
             <p>Three cooperating agents run inside a dashboard with progressive result rendering.
               Agent 1 (Contextualizer) pulls internal analysis from Snowflake Cortex. Agent 2
-              (Researcher) layers in real-time web research. Agent 3 (Strategist) synthesizes
+              (Researcher) layers in real-time web research via Perplexity. Agent 3 (Strategist) synthesizes
               both into a sales strategy, which can be exported to PDF or Markdown for use
               outside the tool.</p>
           </section>
@@ -108,7 +112,7 @@
 
                 <rect x="20" y="128" width="170" height="64" rx="8" class="node-rect"/>
                 <text x="105" y="154" text-anchor="middle" class="node-label">Researcher</text>
-                <text x="105" y="172" text-anchor="middle" class="node-sub">live web + Cortex</text>
+                <text x="105" y="172" text-anchor="middle" class="node-sub">Perplexity + Cortex</text>
 
                 <rect x="20" y="232" width="170" height="64" rx="8" class="node-rect"/>
                 <text x="105" y="258" text-anchor="middle" class="node-label">Strategist</text>
@@ -145,7 +149,7 @@
               <span class="tag">Python</span>
               <span class="tag">Streamlit</span>
               <span class="tag">Snowflake Cortex (Claude Sonnet 4.5)</span>
-              <span class="tag">Live web-research API</span>
+              <span class="tag">Perplexity</span>
               <span class="tag">Auth0</span>
               <span class="tag">WeasyPrint</span>
               <span class="tag">Typed JSON schemas</span>
@@ -163,8 +167,24 @@
 
           <section>
             <h2><span class="num">06</span> Status</h2>
-            <p>Working app with dual deploy modes. A live demo isn't available since the app
-              connects to internal company data in Snowflake.</p>
+            <p>Working app with dual deploy modes, deployed with a live, interactive demo below.</p>
+          </section>
+
+          <section id="live-demo">
+            <h2><span class="num">07</span> Live demo</h2>
+            <p>Try it yourself — select <b>Existing</b> and pick a customer from the list, and the
+              three agents build a full strategic profile: market position, competitive posture,
+              and sustainability profile, exportable to PDF or Markdown. (New-prospect lookup is
+              disabled in this public demo.) Because each agent's output is constrained to a
+              required JSON template, the report structure is repeatable — the same customer
+              produces the same sections and shape every time, not a different layout each run.</p>
+            <div class="demo-embed">
+              <div class="demo-embed-bar">
+                <span class="demo-embed-url">multi-agent-sales-intel-production.up.railway.app</span>
+                <a href="https://multi-agent-sales-intel-production.up.railway.app/" target="_blank" rel="noopener">Open in new tab ↗</a>
+              </div>
+              <iframe src="https://multi-agent-sales-intel-production.up.railway.app/" title="Sales Intel — live demo" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
           </section>
 
         </article>
@@ -173,22 +193,18 @@
       <aside class="case-sidebar">
         <div class="sidebar-block">
           <p class="sidebar-label">Status</p>
-          <span class="status status-prototype">Working app</span>
+          <span class="status status-live">Live demo</span>
         </div>
         <div class="sidebar-block">
           <p class="sidebar-label">Role</p>
           <p style="color:var(--color-text);font-size:var(--text-sm);">Sole engineer — agent design, orchestration, dashboard, export pipeline</p>
         </div>
-        <div class="sidebar-block">
-          <p class="sidebar-label">Demo</p>
-          <p style="color:var(--color-text-muted);font-size:var(--text-sm);">Unavailable — connects to internal company data (Snowflake)</p>
-        </div>
       </aside>
     </section>
 
     <div class="case-nav-footer">
-      <a href="./tm1-finance-agent.html" class="btn btn-ghost">← Previous: TM1 Finance Agent</a>
-      <a href="./agentic-sql-analyst.html" class="btn btn-ghost">Next: Agentic SQL Analyst →</a>
+      <a href="./contract-performance-tracker.html" class="btn btn-ghost">← Previous: Contract Performance Tracker</a>
+      <a href="./meal-prep-ops.html" class="btn btn-ghost">Next: Meal Prep Ops →</a>
     </div>
 
   </div>

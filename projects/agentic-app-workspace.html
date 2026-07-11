@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agentic App Workspace — Internal Platform Framework | Carlos Salgado</title>
-<meta name="description" content="Case study: an internal starter framework that distills architecture and context-engineering patterns from four production AI apps into a one-command scaffold.">
+<title>Agentic App Workspace — Personal Platform Framework | Carlos Salgado</title>
+<meta name="description" content="Case study: a personal starter framework that distills architecture and context-engineering patterns from four production AI apps into a one-command scaffold.">
 <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,13 +40,13 @@
 
     <section class="case-hero">
       <a href="../index.html" class="back-link">Back to all projects</a>
-      <p class="case-kicker">Project 06 / Internal platform engineering</p>
+      <p class="case-kicker">Project 02 / Personal platform engineering</p>
       <h1>Agentic App Workspace</h1>
-      <p class="case-oneliner">An internal starter framework that distills the architecture and
+      <p class="case-oneliner">A personal starter framework that distills the architecture and
         "context engineering" patterns from four production AI apps into a one-command scaffold
         for the next one.</p>
       <div class="case-meta-row">
-        <span class="status status-internal">Active internal foundation · private</span>
+        <span class="status status-live">Active use</span>
         <div class="badge-row">
           <span class="tag">Python</span>
           <span class="tag">Snowflake</span>
@@ -74,7 +74,7 @@
               archetypes — Streamlit-in-Snowflake, container agent app, full-stack React, research
               platform, and table chatbot — each fully self-contained with its own docs, config
               conventions, and AI-agent instructions, spun up through a single scaffold script.
-              This is framed as internal platform engineering rather than a single user-facing
+              This is framed as personal platform engineering rather than a single user-facing
               app: it's a framework for building the other apps faster.</p>
           </section>
 
@@ -130,6 +130,45 @@
               </svg></div>
               <p class="diagram-caption">Fig. 1 — One scaffold command selects an archetype and produces a new, fully self-contained app repository.</p>
             </div>
+            <p>Every layer of the workspace follows the same three-part "harness" pattern I use for
+              structuring any AI-agent workspace: a <b>map</b> (<code style="font-family:var(--font-mono);font-size:0.95em;">CLAUDE.md</code> /
+              <code style="font-family:var(--font-mono);font-size:0.95em;">copilot-instructions.md</code>) that's always loaded and kept under
+              200 lines, a <b>router</b> (<code style="font-family:var(--font-mono);font-size:0.95em;">CONTEXT.md</code>) that tells an agent what
+              to load for a given task and what to skip, and the workspace itself — self-contained
+              and siloed, so an agent working inside one archetype never reads another archetype's
+              docs.</p>
+            <div class="diagram-frame">
+              <div class="diagram-scroll"><pre class="tree-block">app-workspace/
+├─ .github/copilot-instructions.md   <span class="hl">← map</span>
+├─ CLAUDE.md  (twin map) + AGENTS.md
+├─ CONTEXT.md                         <span class="hl">← router</span>
+├─ core/                              <span class="dim">config · snowflake · llm · auth</span>
+├─ archetypes/                        <span class="dim">5 app shapes, ready to scaffold</span>
+│  ├─ streamlit-in-snowflake/
+│  ├─ container-agent-app/
+│  ├─ fullstack-react/
+│  ├─ research-platform/
+│  └─ table-chatbot/
+├─ ontology/                          <span class="dim">certified table semantics</span>
+├─ docs/                              <span class="dim">architecture · context-eng · workflows</span>
+├─ scripts/scaffold_app.py
+└─ _meta/                             <span class="dim">why it's shaped this way</span></pre></div>
+              <p class="diagram-caption">Fig. 2 — Top level of the workspace: the map and router live at the root, alongside the five archetypes, a shared core package, and the certified ontology layer.</p>
+            </div>
+            <div class="diagram-frame">
+              <div class="diagram-scroll"><pre class="tree-block">archetypes/streamlit-in-snowflake/
+├─ CONTEXT.md                         <span class="dim">load this · skip that, per task</span>
+├─ .github/
+│  ├─ copilot-instructions.md
+│  └─ instructions/*.instructions.md  <span class="dim">path-scoped</span>
+├─ docs/                              <span class="dim">table docs · app decisions</span>
+├─ skills/                            <span class="dim">SQL + metric playbook for this app</span>
+├─ app/                               <span class="dim">runnable skeleton (imports core pkg)</span>
+├─ tests/                             <span class="dim">pytest scaffolding</span>
+├─ snowflake.yml                      <span class="dim">→ snow streamlit deploy</span>
+└─ .env.example                       <span class="dim">every variable documented</span></pre></div>
+              <p class="diagram-caption">Fig. 3 — Zoomed into one archetype: its own map, router, docs, and skills travel with it — the folder is the agent config.</p>
+            </div>
           </section>
 
           <section>
@@ -137,6 +176,8 @@
             <div class="badge-row">
               <span class="tag">Python</span>
               <span class="tag">Snowflake</span>
+              <span class="tag">Harness</span>
+              <span class="tag">Scaffold</span>
               <span class="tag">Templated project archetypes</span>
               <span class="tag">Structured context docs for AI coding agents</span>
               <span class="tag">Claude / Copilot instructions per archetype</span>
@@ -146,16 +187,16 @@
           <section>
             <h2><span class="num">05</span> Highlights</h2>
             <ul role="list">
-              <li>A meta-project — a framework for building the other apps faster, not a single-app deliverable.</li>
-              <li>Demonstrates platform and internal developer-experience thinking beyond individual app work.</li>
+              <li>A framework for building the other apps faster, not a single-app deliverable itself.</li>
+              <li>Demonstrates platform and developer-experience thinking beyond individual app work.</li>
               <li>Five self-contained archetypes, each carrying its own docs and AI-agent instructions.</li>
             </ul>
           </section>
 
           <section>
             <h2><span class="num">06</span> Status</h2>
-            <p>Active internal foundation for new app development. Private — used internally to
-              bootstrap new Snowflake-backed AI applications.</p>
+            <p>Personal harness for new app development. Private — used to bootstrap new
+              Snowflake-backed AI applications.</p>
           </section>
 
         </article>
@@ -164,22 +205,18 @@
       <aside class="case-sidebar">
         <div class="sidebar-block">
           <p class="sidebar-label">Status</p>
-          <span class="status status-internal">Private / internal foundation</span>
+          <span class="status status-live">Active use</span>
         </div>
         <div class="sidebar-block">
           <p class="sidebar-label">Role</p>
           <p style="color:var(--color-text);font-size:var(--text-sm);">Sole engineer — pattern mining, archetype design, scaffold tooling</p>
         </div>
-        <div class="sidebar-block">
-          <p class="sidebar-label">Demo</p>
-          <p style="color:var(--color-text-muted);font-size:var(--text-sm);">Unavailable — internal developer tooling, not a user-facing app</p>
-        </div>
       </aside>
     </section>
 
     <div class="case-nav-footer">
-      <a href="./meal-prep-ops.html" class="btn btn-ghost">← Previous: Meal Prep Ops</a>
-      <a href="../index.html" class="back-link">Back to all projects</a>
+      <a href="./tm1-finance-agent.html" class="btn btn-ghost">← Previous: TM1 Finance Agent</a>
+      <a href="./agentic-sql-analyst.html" class="btn btn-ghost">Next: Agentic SQL Analyst →</a>
     </div>
 
   </div>

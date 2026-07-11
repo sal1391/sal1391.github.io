@@ -40,19 +40,22 @@
 
     <section class="case-hero">
       <a href="../index.html" class="back-link">Back to all projects</a>
-      <p class="case-kicker">Project 02 / Agentic AI for finance</p>
+      <p class="case-kicker">Project 01 / Agentic AI for finance</p>
       <h1>TM1 Finance Agent</h1>
       <p class="case-oneliner">Conversational finance assistant that lets executives ask natural-language
-        questions — "What was GP for FY2025?" — and get proof-first, chart-backed answers straight
+        questions — "What was Profit and Loss for Q1 2026?" — and get proof-first, chart-backed answers straight
         from the company's official planning hierarchy.</p>
       <div class="case-meta-row">
-        <span class="status status-internal">Demo unavailable — internal data</span>
+        <span class="status status-live">Live demo</span>
         <div class="badge-row">
           <span class="tag">Python</span>
-          <span class="tag">Snowflake Cortex</span>
+          <span class="tag">Gradio</span>
           <span class="tag">Snowpark</span>
-          <span class="tag">Azure OpenAI</span>
+          <span class="tag">Anthropic Claude</span>
         </div>
+      </div>
+      <div class="case-meta-row">
+        <a href="#live-demo" class="btn btn-primary">Try the live demo ↓</a>
       </div>
     </section>
 
@@ -157,10 +160,10 @@
             <h2><span class="num">04</span> Tech stack</h2>
             <div class="badge-row">
               <span class="tag">Python</span>
-              <span class="tag">Streamlit-style chat UI</span>
-              <span class="tag">Snowflake Cortex</span>
-              <span class="tag">Snowpark</span>
-              <span class="tag">Azure OpenAI (fallback)</span>
+              <span class="tag">Gradio chat UI</span>
+              <span class="tag">Snowflake Snowpark</span>
+              <span class="tag">Swappable LLM router (Anthropic Claude / Azure AI Foundry / Snowflake Cortex)</span>
+              <span class="tag">Plotly</span>
               <span class="tag">Custom taxonomy / synonym / time services</span>
             </div>
           </section>
@@ -176,9 +179,67 @@
 
           <section>
             <h2><span class="num">06</span> Status</h2>
-            <p>Production-grade agent architecture, fully aware of the underlying semantic layer.
-              A live demo isn't available since the agent connects to internal company data in
-              Snowflake.</p>
+            <p>Production-grade agent architecture, fully aware of the underlying semantic layer,
+              deployed with a live, interactive demo below.</p>
+          </section>
+
+          <section id="knowledge-graph">
+            <h2><span class="num">07</span> Why a knowledge graph</h2>
+            <p>Finance data like this doesn't live in a tidy table — it's a 7-level parent-child
+              hierarchy (CLASS6 → CLASS5 → CLASS4 → CLASS3 → CLASS2 → CLASS1 → ACCOUNT),
+              with six more dimensions slicing across it. Point a generic text-to-SQL tool at that
+              and it has no idea Operating Income contains Gross Profit, which contains Trade GP,
+              which contains — the rollup relationships are invisible to it.</p>
+            <p>So the agent doesn't flatten the hierarchy into a table or a semantic-layer YAML —
+              it loads the whole thing as a knowledge graph at startup: nodes are financial
+              concepts, edges are "rolls-up-to" links, and every node knows its parent, children,
+              and full path. When a question comes in, the agent resolves it straight to a node and
+              reads that node's neighborhood — parents for the rollup, children to drill — without
+              ever walking from the root. That's GraphRAG-style grounding: graph traversal, not
+              vector similarity search.</p>
+            <p>The model never writes SQL. It picks a tool and arguments; a vetted template turns
+              that into a deterministic, whitelisted query — same question, same query, every time
+              — with a proof line (metric · level · period · source) showing exactly what ran.</p>
+            <p>Why not just point a generic semantic-layer tool at it instead? Those map questions
+              against a flat model in a YAML — tables, columns, joins. A 7-level recursive
+              parent-child hierarchy doesn't fit that shape: flatten it and the drill relationships
+              are lost, and generic text-to-SQL is non-deterministic enough that it can be silently
+              wrong. Grounding the agent in the real graph structure — and giving it a skills
+              playbook instead of just a system prompt — is what makes the hierarchy answerable.</p>
+            <div class="badge-row">
+              <span class="tag">156 hierarchy nodes</span>
+              <span class="tag">7 CLASS levels</span>
+              <span class="tag">6 dimensions</span>
+              <span class="tag">1,002 GL accounts</span>
+              <span class="tag">100+ synonyms</span>
+              <span class="tag">8 query tools</span>
+              <span class="tag">176 tests passing</span>
+            </div>
+            <p>Explore the live knowledge graph and the step-by-step run-flow below.</p>
+            <div class="demo-embed">
+              <div class="demo-embed-bar">
+                <span class="demo-embed-url">Interactive companion — knowledge graph &amp; run-flow</span>
+                <a href="./assets/tm1-taxonomy-companion.html" target="_blank" rel="noopener">Open in new tab ↗</a>
+              </div>
+              <iframe src="./assets/tm1-taxonomy-companion.html" title="TM1 knowledge graph — interactive companion" loading="lazy"></iframe>
+            </div>
+          </section>
+
+          <section id="live-demo">
+            <h2><span class="num">08</span> Live demo</h2>
+            <p>Try it yourself. A few things to try asking:</p>
+            <div class="prompt-pills">
+              <span class="prompt-pill">"What was Profit and Loss for Q1 2026?"</span>
+              <span class="prompt-pill">"Can you break down the operating expense by month?"</span>
+              <span class="prompt-pill">"Compare that against the prior year quarter."</span>
+            </div>
+            <div class="demo-embed">
+              <div class="demo-embed-bar">
+                <span class="demo-embed-url">tm1-ledger-demo-production.up.railway.app</span>
+                <a href="https://tm1-ledger-demo-production.up.railway.app/" target="_blank" rel="noopener">Open in new tab ↗</a>
+              </div>
+              <iframe src="https://tm1-ledger-demo-production.up.railway.app/" title="TM1 Finance Agent — live demo" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
           </section>
 
         </article>
@@ -187,22 +248,18 @@
       <aside class="case-sidebar">
         <div class="sidebar-block">
           <p class="sidebar-label">Status</p>
-          <span class="status status-internal">Production-grade agent</span>
+          <span class="status status-live">Live demo</span>
         </div>
         <div class="sidebar-block">
           <p class="sidebar-label">Role</p>
           <p style="color:var(--color-text);font-size:var(--text-sm);">Sole engineer — orchestrator design, service layer, Snowflake integration</p>
         </div>
-        <div class="sidebar-block">
-          <p class="sidebar-label">Demo</p>
-          <p style="color:var(--color-text-muted);font-size:var(--text-sm);">Unavailable — connects to internal company data (Snowflake)</p>
-        </div>
       </aside>
     </section>
 
     <div class="case-nav-footer">
-      <a href="./contract-performance-tracker.html" class="btn btn-ghost">← Previous: Contract Performance Tracker</a>
-      <a href="./sales-intel.html" class="btn btn-ghost">Next: Sales Intel →</a>
+      <a href="../index.html" class="back-link">Back to all projects</a>
+      <a href="./agentic-app-workspace.html" class="btn btn-ghost">Next: Agentic App Workspace →</a>
     </div>
 
   </div>

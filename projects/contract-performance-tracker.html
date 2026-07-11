@@ -40,12 +40,12 @@
 
     <section class="case-hero">
       <a href="../index.html" class="back-link">Back to all projects</a>
-      <p class="case-kicker">Project 01 / Internal platform engineering tool</p>
+      <p class="case-kicker">Project 04 / Internal platform engineering tool</p>
       <h1>Contract Performance Tracker</h1>
       <p class="case-oneliner">Full-stack platform that reconciles approved fuel supply contracts
         against real transaction data, closing the loop between deal terms and actual performance.</p>
       <div class="case-meta-row">
-        <span class="status status-prototype">Working local prototype</span>
+        <span class="status status-live">Live demo</span>
         <div class="badge-row">
           <span class="tag">FastAPI</span>
           <span class="tag">SQLAlchemy 2.0</span>
@@ -53,6 +53,9 @@
           <span class="tag">Postgres</span>
           <span class="tag">React 19</span>
         </div>
+      </div>
+      <div class="case-meta-row">
+        <a href="#live-demo" class="btn btn-primary">Try the live demo ↓</a>
       </div>
     </section>
 
@@ -185,10 +188,24 @@
           <section>
             <h2><span class="num">06</span> Status</h2>
             <p>Working local prototype — the core flow (bids, LIFT mapping, dashboard, org tree +
-              row-level security, access model) is built and running end-to-end. Snowflake
-              integration and Auth0 login are the remaining phases before a production rollout.
-              A live demo isn't available since the app connects to internal company data in
-              Snowflake.</p>
+              row-level security, access model) is built and running end-to-end, deployed with a
+              live, interactive demo below.</p>
+          </section>
+
+          <section id="live-demo">
+            <h2><span class="num">07</span> Live demo</h2>
+            <p>Try it yourself — explore Overview for risk posture, Accounts for customer rollups,
+              and Mapping to reconcile bid lines against transactions. It's a shared demo
+              environment, so changes made by other visitors may be visible.</p>
+            <div class="demo-embed">
+              <div class="demo-embed-bar">
+                <span class="demo-embed-url">web-production-fc5d3.up.railway.app</span>
+                <a href="https://web-production-fc5d3.up.railway.app" target="_blank" rel="noopener">Open in new tab ↗</a>
+              </div>
+              <div class="demo-embed-fit" data-fit-width="1440" data-fit-height="900">
+                <iframe src="https://web-production-fc5d3.up.railway.app" title="Contract Performance Tracker — live demo" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+            </div>
           </section>
 
         </article>
@@ -197,22 +214,18 @@
       <aside class="case-sidebar">
         <div class="sidebar-block">
           <p class="sidebar-label">Status</p>
-          <span class="status status-prototype">Working local prototype</span>
+          <span class="status status-live">Live demo</span>
         </div>
         <div class="sidebar-block">
           <p class="sidebar-label">Role</p>
           <p style="color:var(--color-text);font-size:var(--text-sm);">Sole engineer — design, backend, frontend, data model</p>
         </div>
-        <div class="sidebar-block">
-          <p class="sidebar-label">Demo</p>
-          <p style="color:var(--color-text-muted);font-size:var(--text-sm);">Unavailable — connects to internal company data (Snowflake)</p>
-        </div>
       </aside>
     </section>
 
     <div class="case-nav-footer">
-      <a href="../index.html" class="back-link">Back to all projects</a>
-      <a href="./tm1-finance-agent.html" class="btn btn-ghost">Next: TM1 Finance Agent →</a>
+      <a href="./agentic-sql-analyst.html" class="btn btn-ghost">← Previous: Agentic SQL Analyst</a>
+      <a href="./sales-intel.html" class="btn btn-ghost">Next: Sales Intel →</a>
     </div>
 
   </div>
@@ -237,5 +250,23 @@
   </div>
 </footer>
 
+<script>
+(function () {
+  var wrap = document.querySelector('.demo-embed-fit');
+  if (!wrap) return;
+  var iframe = wrap.querySelector('iframe');
+  var w = parseInt(wrap.dataset.fitWidth, 10);
+  var h = parseInt(wrap.dataset.fitHeight, 10);
+  iframe.style.width = w + 'px';
+  iframe.style.height = h + 'px';
+  function fit() {
+    var scale = wrap.clientWidth / w;
+    iframe.style.transform = 'scale(' + scale + ')';
+    wrap.style.height = (h * scale) + 'px';
+  }
+  window.addEventListener('resize', fit);
+  fit();
+})();
+</script>
 </body>
 </html>
