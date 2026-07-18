@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<title>OG card generator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,500&f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0e14; --surface:#101420; --surface2:#141926;
+    --border:#2a3244; --text:#e7eaf1; --muted:#8b93a7; --faint:#565f74;
+    --amber:#f5a524; --amber-glow:#3a2e15; --green:#55b579;
+    --font-display:'Cabinet Grotesk','General Sans','Segoe UI',sans-serif;
+    --font-body:'General Sans','Segoe UI',sans-serif;
+    --font-mono:'JetBrains Mono','SFMono-Regular',Consolas,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{width:1200px;height:630px;overflow:hidden;background:var(--bg);}
+  .card{
+    position:relative;width:1200px;height:630px;
+    background:
+      radial-gradient(1000px 520px at 108% -12%, rgba(245,165,36,0.16), transparent 60%),
+      radial-gradient(800px 480px at -8% 118%, rgba(91,157,217,0.06), transparent 55%),
+      var(--bg);
+    padding:70px 76px;display:flex;flex-direction:column;
+    font-family:var(--font-body);color:var(--text);
+  }
+  /* faint dot grid */
+  .card::before{
+    content:"";position:absolute;inset:0;
+    background-image:radial-gradient(rgba(255,255,255,0.045) 1px, transparent 1px);
+    background-size:26px 26px;-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,0.7),transparent 70%);
+    mask-image:linear-gradient(180deg,rgba(0,0,0,0.7),transparent 70%);pointer-events:none;
+  }
+  .card>*{position:relative;z-index:1;}
+
+  .row{display:flex;align-items:center;justify-content:space-between;}
+
+  .brand{display:flex;align-items:center;gap:14px;}
+  .mark{width:44px;height:44px;border:1px solid var(--border);border-radius:11px;
+    background:var(--surface);display:flex;align-items:center;justify-content:center;color:var(--amber);}
+  .mark svg{width:26px;height:26px;}
+  .brand-name{font-family:var(--font-body);font-weight:600;font-size:23px;letter-spacing:-0.01em;}
+  .brand-name .dim{color:var(--amber);}
+
+  .pill{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-mono);
+    font-size:15px;color:var(--muted);background:var(--surface);border:1px solid var(--border);
+    padding:9px 16px;border-radius:9999px;letter-spacing:0.01em;}
+  .pill .dot{width:9px;height:9px;border-radius:50%;background:var(--green);
+    box-shadow:0 0 0 4px rgba(85,181,121,0.18);}
+
+  .mid{flex:1;display:flex;flex-direction:column;justify-content:center;padding-left:26px;
+    border-left:3px solid var(--amber);}
+  .kicker{font-family:var(--font-mono);font-size:16px;color:var(--amber);
+    text-transform:uppercase;letter-spacing:0.16em;margin-bottom:20px;}
+  .title{font-family:var(--font-display);font-weight:700;font-size:74px;line-height:1.0;
+    letter-spacing:-0.02em;color:#fff;}
+  .oneliner{font-family:var(--font-body);font-weight:400;font-size:25px;line-height:1.42;
+    color:var(--muted);margin-top:24px;max-width:40ch;}
+
+  .foot{display:flex;align-items:center;justify-content:space-between;gap:24px;}
+  .tags{display:flex;flex-wrap:wrap;gap:11px;}
+  .tag{font-family:var(--font-mono);font-size:15px;color:#c7cedd;background:var(--surface2);
+    border:1px solid var(--border);border-radius:8px;padding:8px 14px;letter-spacing:0.01em;}
+  .site{font-family:var(--font-mono);font-size:16px;color:var(--faint);white-space:nowrap;}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="row">
+    <div class="brand">
+      <div class="mark">
+        <svg viewBox="0 0 40 40" fill="none">
+          <circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+          <circle cx="10" cy="30" r="3" stroke="currentColor" stroke-width="2"/>
+          <circle cx="30" cy="20" r="3.5" fill="currentColor"/>
+          <path d="M12.6 11.6L27 18.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M12.6 28.4L27 21.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span class="brand-name">carlos<span class="dim">.</span>salgado</span>
+    </div>
+    <span class="pill"><span class="dot"></span><span id="status">Live demo</span></span>
+  </div>
+
+  <div class="mid">
+    <div class="kicker" id="kicker">PROJECT 01 / AGENTIC AI</div>
+    <div class="title" id="title">Project Title</div>
+    <div class="oneliner" id="oneliner">One-liner goes here.</div>
+  </div>
+
+  <div class="foot">
+    <div class="tags" id="tags"></div>
+    <div class="site">sal1391.github.io</div>
+  </div>
+</div>
+
+<script>
+  const DATA = [
+    {slug:'tm1-finance-agent', status:'Live demo', kicker:'Project 01 / Agentic AI for finance',
+     title:'TM1 Finance Agent',
+     oneliner:'Conversational finance assistant that answers executive questions with proof-first, chart-backed evidence from the official planning hierarchy.',
+     tags:['Python','Gradio','Snowpark','Anthropic Claude']},
+    {slug:'agentic-app-workspace', status:'Active use', kicker:'Project 02 / Personal platform engineering',
+     title:'Agentic App Workspace',
+     oneliner:'A personal starter framework distilling architecture patterns from four production AI apps into a one-command scaffold for the next one.',
+     tags:['Python','Snowflake','Archetypes','AI-agent instructions']},
+    {slug:'agentic-sql-analyst', status:'Live demo', kicker:'Project 03 / Agentic analytics',
+     title:'Agentic SQL Analyst',
+     oneliner:'A self-directed analytics agent that writes its own SQL to compare month-over-month performance and explain what changed — and why.',
+     tags:['Python','Streamlit','Snowflake','Azure AI Foundry']},
+    {slug:'contract-performance-tracker', status:'Live demo', kicker:'Project 04 / Internal platform tool',
+     title:'Contract Performance Tracker',
+     oneliner:'Full-stack platform that reconciles approved fuel supply contracts against real transaction data, closing the loop between deal terms and performance.',
+     tags:['FastAPI','React 19','Postgres','Snowflake']},
+    {slug:'sales-intel', status:'Live demo', kicker:'Project 05 / Multi-agent AI system',
+     title:'Sales Intel',
+     oneliner:'A 3-agent AI system fusing live web research, LLM synthesis, and internal sales data into one strategic account-intelligence dashboard.',
+     tags:['Streamlit','Snowflake Cortex','Perplexity','Auth0']},
+    {slug:'meal-prep-ops', status:'Live in production', kicker:'Project 06 / Production operations software',
+     title:'Meal Prep Ops',
+     oneliner:'A production Django app running the day-to-day of a real meal-prep business — clients, meal plans, inventory, and kitchen production.',
+     tags:['Django 5.2','HTMX','Postgres','Docker']},
+    {slug:'portfolio', status:'Open to roles', kicker:'Portfolio / BI & Analytics Engineer · Applied AI',
+     title:'Carlos Salgado',
+     oneliner:'The BI ecosystems and AI decision tools finance and operations teams run on — 230+ dashboards, agentic pipelines, and live demos you can open and run.',
+     tags:['Snowflake','SQL','Tableau','Python','Agentic AI']},
+  ];
+  const i = Math.max(0, Math.min(DATA.length-1, parseInt(new URLSearchParams(location.search).get('i')||'0',10)));
+  const d = DATA[i];
+  document.getElementById('status').textContent = d.status;
+  document.getElementById('kicker').textContent = d.kicker.toUpperCase();
+  document.getElementById('title').textContent = d.title;
+  document.getElementById('oneliner').textContent = d.oneliner;
+  document.getElementById('tags').innerHTML = d.tags.map(t=>`<span class="tag">${t}</span>`).join('');
+  // Auto-shrink very long titles so they never wrap past two lines
+  const titleEl = document.getElementById('title');
+  if (d.title.length > 20) titleEl.style.fontSize = '62px';
+  document.title = 'ready:'+d.slug;
+</script>
+</body>
+</html>

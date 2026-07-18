@@ -271,6 +271,14 @@ body {
   margin-top: var(--space-5);
   max-width: 60ch;
 }
+.hero-aside {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-top: var(--space-4);
+  max-width: 58ch;
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--color-primary);
+}
 .hero-actions {
   display: flex;
   gap: var(--space-4);
