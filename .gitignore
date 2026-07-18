@@ -1,1 +1,5 @@
 *.zip
+
+# Private / non-site content
+resume/
+.maestro/
